@@ -6,14 +6,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
 
 public class WebElementTest {
     public static void main(String[] args) throws InterruptedException {
-        WebDriverManager.firefoxdriver().setup();
-        WebDriver driver= new FirefoxDriver();
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver= new ChromeDriver();
         driver.get("https://demoqa.com/text-box");
         driver.manage().window().maximize();
 
@@ -23,7 +25,7 @@ public class WebElementTest {
         // The implicit wait instructs the WebDriver to wait for a certain amount of time
         // when trying to locate an element if it is not immediately present.
         // In this case, the wait time is set to 30 seconds.
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         //clear and sendkeys example
         WebElement elementFullName=driver.findElement(By.id("userName"));
@@ -54,11 +56,14 @@ public class WebElementTest {
         elementPermanentAddress.sendKeys("Sutraput, Mymensingh");
 //        Thread.sleep(1000);
 
-        WebElement elementSubmit=driver.findElement(By.cssSelector("[id='submit']"));
+//        WebElement elementSubmit=driver.findElement(By.cssSelector("[id='submit']"));
+        WebElement elementSubmit= driver.findElement(By.xpath("//button[@class='btn btn-primary']"));
         boolean isDisplayedSubmit=elementSubmit.isDisplayed();
         System.out.println("is submit displayed in dom:" + isDisplayedSubmit);
-//        elementSubmit.click();
-//        Thread.sleep(1500);
+
+        // Click the element
+        elementSubmit.click();
+        Thread.sleep(1500);
 
         //this will print all the links of this page
         //<a id="created" href="javascript:void(0)">Created</a>
@@ -77,8 +82,8 @@ public class WebElementTest {
         WebElement checkedCheckbox = driver.findElement(By.xpath("//svg[@class='rct-icon rct-icon-check']"));
 
         // Validate whether the checkboxes are selected or not
-        System.out.println("Unchecked checkbox isSelected: " + uncheckedCheckbox.isSelected());
-        System.out.println("Checked checkbox isSelected: " + checkedCheckbox.isSelected());
+//        System.out.println("Unchecked checkbox isSelected: " + uncheckedCheckbox.isSelected());
+//        System.out.println("Checked checkbox isSelected: " + checkedCheckbox.isSelected());
 
 
 
